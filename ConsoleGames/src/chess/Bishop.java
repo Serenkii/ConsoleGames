@@ -3,7 +3,7 @@ package chess;
 public class Bishop extends Piece {
 
 	public Bishop(Color color) {
-		this.color = color;
+		super(color);
 		if(this.color == Color.BLACK) {
 			//symbol = '♝';	
 			symbol = 'B';
@@ -12,5 +12,7 @@ public class Bishop extends Piece {
 			//symbol = '♗';
 			symbol = 'b';
 		}
+		name = name + " bishop";
+		value = 3;
 	}
 }

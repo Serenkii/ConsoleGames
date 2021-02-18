@@ -3,7 +3,7 @@ package chess;
 public class Pawn extends Piece {
 
 	public Pawn(Color color) {
-		this.color = color;
+		super(color);
 		if(this.color == Color.BLACK) {
 			//symbol = '\u265F';
 			symbol = 'P';
@@ -12,5 +12,7 @@ public class Pawn extends Piece {
 			//symbol = '♙';	
 			symbol = 'p';
 		}
+		name = name + " pawn";
+		value = 1;
 	}
 }

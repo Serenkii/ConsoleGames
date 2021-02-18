@@ -3,7 +3,7 @@ package chess;
 public class King extends Piece {
 
 	public King(Color color) {
-		this.color = color;
+		super(color);
 		if(this.color == Color.BLACK) {
 			//symbol = '♚';
 			symbol = 'K';
@@ -12,5 +12,6 @@ public class King extends Piece {
 			//symbol = '♔';
 			symbol = 'k';
 		}
+		name = name + " pawn";
 	}
 }

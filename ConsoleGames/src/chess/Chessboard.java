@@ -2,53 +2,88 @@ package chess;
 
 public class Chessboard {
 	Piece[][] board;
+	Piece[] pieces;
 	
 	public Chessboard() {
 		board = new Piece[8][8];
+		pieces = new Piece[32];
 	}
 	
-	public void print() {
-		System.out.println("  a b c d e f g h");
-		for(int i = 0; i < board.length; i++) {
-			System.out.print(i + 1);
-			System.out.print(' ');
-			for(int j = 0; j < board.length; j++) {
-				board[i][j].print();
-				System.out.print(' ');
+	/**
+	 * 
+	 * @param columnX is a letter from a to h
+	 * @param lineY is a number from 1 to 8
+	 */
+	public boolean findPiece(char columnX, char lineY) {
+		int x = columnX - 97;
+		//System.out.println("x is now: " + x + " because columnX is " + columnX);
+		int y = lineY - 49;
+		//System.out.println("y is now: " + y + " because lineY is " + lineY);
+		for (int i = 0; i < pieces.length; i++) {
+			if(pieces[i].alive && pieces[i].getX() == x && pieces[i].getY() == y) {
+				System.out.println(i + " findPiece - found one");
+				return true; 	//There is a piece at this position
 			}
-			System.out.print(i + 1);
-			System.out.println();
+			//System.out.println(i + " findPiece - none found");
 		}
-		System.out.println("  a b c d e f g h");
+		//System.out.println("findPiece - none found");
+		return false;	//There is no piece at this position
 	}
 	
-	public void defaultPosition() {
-		for(int i = 0; i < board.length; i++) {
-			for(int j = 0; j < board.length; j++) {
-				if(i % 2 == 0 && j % 2 == 0 || i % 2 != 0 && j % 2 != 0) {
-					board[i][j] = new Empty(Color.WHITE);
-					
+	public void drawBoard() {
+		for(int y = 0; y < 8; y++) {
+			for(int x = 0; x < 8; x++) {
+				if(board[x][y] != null) {
+					board[x][y].print();
 				}
 				else {
-					board[i][j] = new Empty(Color.BLACK);
+					System.out.print("/");
 				}
+				System.out.print(" ");
 			}
+			System.out.println();
 		}
-		setPieces(Color.BLACK, 0, 1);
-		setPieces(Color.WHITE, 7, 6);
 	}
 	
-	private void setPieces(Color color, int lineRest, int linePawns) {
-		board[lineRest][0] = new Rook(color);
-		board[lineRest][1] = new Knight(color);
-		board[lineRest][2] = new Bishop(color);
-		board[lineRest][3] = new Queen(color);
-		board[lineRest][4] = new King(color);
-		board[lineRest][5] = new Bishop(color);
-		board[lineRest][6] = new Knight(color);
-		board[lineRest][7] = new Rook(color);
-		for(int i = 0; i < board.length; i++) {
-			board[linePawns][i] = new Pawn(color);
+	public void fillBoard() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++ ) {
+				board[i][j] = null;
+			}
+		}
+		for (int i = 0; i < pieces.length; i++) {
+			board[pieces[i].getX()][pieces[i].getY()] = pieces[i];
+		}
+	}
+	
+	public void createAllPieces() {
+		createPieces(Color.BLACK, 0); 
+		createPieces(Color.WHITE, 16);
+		for(int i = 0; i < 8; i++) {	//Black pieces
+			pieces[i].setPosition((char) ('a' + i), '1');
+		}
+		for(int i = 0; i < 8; i++) {	//Black pawns
+			pieces[i + 8].setPosition((char) ('a' + i), '2');
+		}
+		for(int i = 0; i < 8; i++) {	//White pieces
+			pieces[i + 16].setPosition((char) ('a' + i), '8');
+		}
+		for(int i = 0; i < 8; i++) {	//White pawns
+			pieces[i + 24].setPosition((char) ('a' + i), '7');
+		}
+	}
+	
+	public void createPieces(Color color, int start) {
+		pieces[start + 0] = new Rook(color);
+		pieces[start + 1] = new Knight(color);
+		pieces[start + 2] = new Bishop(color);
+		pieces[start + 3] = new Queen(color);
+		pieces[start + 4] = new King(color);
+		pieces[start + 5] = new Bishop(color);
+		pieces[start + 6] = new Knight(color);
+		pieces[start + 7] = new Rook(color);
+		for(int i = 0; i < 8; i++) {
+			pieces[start + 8 + i] = new Pawn(color);
 		}
 	}
 }

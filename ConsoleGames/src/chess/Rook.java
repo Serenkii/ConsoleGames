@@ -3,7 +3,7 @@ package chess;
 public class Rook extends Piece {
 
 	public Rook(Color color) {
-		this.color = color;
+		super(color);
 		if(this.color == Color.BLACK) {
 			//symbol = '♜';	
 			symbol = 'R';
@@ -12,5 +12,7 @@ public class Rook extends Piece {
 			//symbol = '♖';		
 			symbol = 'r';
 		}
+		name = name + " rook";
+		value = 5;
 	}
 }
