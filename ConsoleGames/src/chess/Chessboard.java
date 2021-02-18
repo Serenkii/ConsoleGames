@@ -10,24 +10,24 @@ public class Chessboard {
 	}
 	
 	/**
-	 * 
 	 * @param columnX is a letter from a to h
 	 * @param lineY is a number from 1 to 8
+	 * @return The position of the Piece in piece[] if it was found. Else the output is -1.
 	 */
-	public boolean findPiece(char columnX, char lineY) {
+	public int findPiece(char columnX, char lineY) {
 		int x = columnX - 97;
 		//System.out.println("x is now: " + x + " because columnX is " + columnX);
 		int y = lineY - 49;
 		//System.out.println("y is now: " + y + " because lineY is " + lineY);
 		for (int i = 0; i < pieces.length; i++) {
 			if(pieces[i].alive && pieces[i].getX() == x && pieces[i].getY() == y) {
-				System.out.println(i + " findPiece - found one");
-				return true; 	//There is a piece at this position
+				//System.out.println(i + " findPiece - found one");
+				return i; 	//There is a piece at this position
 			}
 			//System.out.println(i + " findPiece - none found");
 		}
 		//System.out.println("findPiece - none found");
-		return false;	//There is no piece at this position
+		return -1;	//There is no piece at this position
 	}
 	
 	public void drawBoard() {
@@ -73,7 +73,7 @@ public class Chessboard {
 		}
 	}
 	
-	public void createPieces(Color color, int start) {
+	private void createPieces(Color color, int start) {
 		pieces[start + 0] = new Rook(color);
 		pieces[start + 1] = new Knight(color);
 		pieces[start + 2] = new Bishop(color);

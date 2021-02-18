@@ -14,6 +14,9 @@ public class Chess {
 		 validUserInput = false;
 		 setup();
 		 play();
+		 play();
+		 play();
+		 play();
 	 }
 	 
 	 public void setup() {
@@ -25,8 +28,10 @@ public class Chess {
 	 public void play() {
 		 if(userInputFromConsole()) {		//true if the input kinda makes sense
 			 char[] inputArray = userInputString.toCharArray();
-			 if(board.findPiece(inputArray[0], inputArray[1])) {	//true if the piece exists
+			 int objectNumber = board.findPiece(inputArray[0], inputArray[1]);
+			 if(objectNumber != -1) {	//true if the piece exists
 				 System.out.println("A piece was found.");
+				 board.pieces[objectNumber].move(inputArray[2], inputArray[3]);
 			 }
 			 else {
 				 System.out.println("We couldn't find the piece you want to move. Please try again.");
@@ -35,6 +40,8 @@ public class Chess {
 		 else {
 			 System.out.println("Your input doesn't seem right. Maybe it's too long, too short or anything else, but please check it.");
 		 }
+		 board.fillBoard();
+		 board.drawBoard();
 	 }
 	 
 	 public boolean userInputFromConsole() {

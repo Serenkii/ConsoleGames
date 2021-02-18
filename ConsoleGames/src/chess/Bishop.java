@@ -14,5 +14,23 @@ public class Bishop extends Piece {
 		}
 		name = name + " bishop";
 		value = 3;
+		moves = new int[4][2];
+		steps = 8;
+		generateMoves();
+	}
+	
+	public void generateMoves() {
+		//moves[moveNumber][move]
+		moves[0][0] = 1;		//x
+		moves[0][1] = 1;		//y
+		
+		moves[1][0] = 1;
+		moves[1][1] = -1;
+		
+		moves[2][0] = -1;
+		moves[2][1] = 1;
+		
+		moves[3][0] = -1;
+		moves[3][1] = -1;
 	}
 }
