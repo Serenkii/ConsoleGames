@@ -2,16 +2,9 @@ package chess;
 
 public class Queen extends Piece {
 
-	public Queen(Color color) {
-		super(color);
-		if(this.color == Color.BLACK) {
-			//symbol = '♛';
-			symbol = 'Q';
-		}
-		else if (this.color == Color.WHITE) {
-			//symbol = '♕';	
-			symbol = 'q';
-		}
+	public Queen(Color color, Position position) {
+		super(color, position);
+		setSymbol("q");		//♛  & ♕
 		name = name + " queen";
 		value = 9;
 		moves = new int[8][2];

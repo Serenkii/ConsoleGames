@@ -2,16 +2,9 @@ package chess;
 
 public class Knight extends Piece {
 
-	public Knight(Color color) {
-		super(color);
-		if(this.color == Color.BLACK) {
-			//symbol = '♞';
-			symbol = 'N';
-		}
-		else if (this.color == Color.WHITE) {
-			//symbol = '♘';	
-			symbol = 'n';
-		}
+	public Knight(Color color, Position position) {
+		super(color, position);
+		setSymbol("n");		//♞  & ♘
 		name = name + " knight";
 		value = 3;
 		moves = new int[8][2];

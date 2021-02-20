@@ -2,16 +2,9 @@ package chess;
 
 public class Rook extends Piece {
 
-	public Rook(Color color) {
-		super(color);
-		if(this.color == Color.BLACK) {
-			//symbol = '♜';	
-			symbol = 'R';
-		}
-		else if (this.color == Color.WHITE) {
-			//symbol = '♖';		
-			symbol = 'r';
-		}
+	public Rook(Color color, Position position) {
+		super(color, position);
+		setSymbol("r");		//♜  & ♖
 		name = name + " rook";
 		value = 5;
 		moves = new int[4][2];

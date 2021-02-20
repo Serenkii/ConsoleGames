@@ -3,16 +3,113 @@ package chess;
 public class Chessboard {
 	Piece[][] board;
 	Piece[] pieces;
-	
+
 	public Chessboard() {
 		board = new Piece[8][8];
 		pieces = new Piece[32];
 	}
 	
 	/**
+	 * 
+	 * @param position of the piece you want to search
+	 * @return If there is a piece in pieces[] with the required position the index of such, otherwise -1.
+	 */
+	public int findPiece(Position position) {
+//		System.out.println(position.toString());
+		for (int i = 0; i < pieces.length; i++) {
+//			System.out.println(i + " -> " +pieces[i].position.toString());
+			if (position.equals(pieces[i].position)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * @param position of the piece you want to search
+	 * @param color of the piece you want to search
+	 * @return If there is a piece in pieces[] with the required position and color, the index of such. If the piece does not exist
+	 * at all, -1 is returned. If the piece has the wrong color, -2.
+	 */
+	public int findPiece(Position position, Color color) {
+		for (int i = 0; i < pieces.length; i++) {
+			if (position.equals(pieces[i].position)) {
+				if(pieces[i].color.equals(color)) {
+					return i;
+				}
+				else {
+					return -2;
+				}
+			}
+		}
+		return -1;
+	}
+
+	
+	public void drawBoard() {
+		System.out.println("\n   a b c d e f g h\n");
+		for(int y = 0; y < 8; y++) {
+			System.out.print(y + 1 + "  ");
+			for(int x = 0; x < 8; x++) {
+				if(board[x][y] != null) {
+					board[x][y].print();
+				}
+				else {
+					System.out.print("/");
+				}
+				System.out.print(" ");
+			}
+			System.out.println(" " + (y + 1));
+		}
+		System.out.println();
+		System.out.println("   a b c d e f g h\n");
+	}
+	
+	public void fillBoard() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++ ) {
+				board[i][j] = null;
+			}
+		}
+		for (int i = 0; i < pieces.length; i++) {
+			board[pieces[i].getX()][pieces[i].getY()] = pieces[i];
+		}
+	}
+	
+	public void createAllPieces() {
+		pieces[0] = new Rook(Color.BLACK, new Position(0, 0));
+		pieces[1] = new Knight(Color.BLACK, new Position(1, 0));
+		pieces[2] = new Bishop(Color.BLACK, new Position(2, 0));
+		pieces[3] = new Queen(Color.BLACK, new Position(3, 0));
+		pieces[4] = new King(Color.BLACK, new Position(4, 0));
+		pieces[5] = new Bishop(Color.BLACK, new Position(5, 0));
+		pieces[6] = new Knight(Color.BLACK, new Position(6, 0));
+		pieces[7] = new Rook(Color.BLACK, new Position(7, 0));
+		
+		pieces[8] = new Rook(Color.WHITE, new Position(0, 7));
+		pieces[9] = new Knight(Color.WHITE, new Position(1, 7));
+		pieces[10] = new Bishop(Color.WHITE, new Position(2, 7));
+		pieces[11] = new Queen(Color.WHITE, new Position(3, 7));
+		pieces[12] = new King(Color.WHITE, new Position(4, 7));
+		pieces[13] = new Bishop(Color.WHITE, new Position(5, 7));
+		pieces[14] = new Knight(Color.WHITE, new Position(6, 7));
+		pieces[15] = new Rook(Color.WHITE, new Position(7, 7));
+		
+		for (int i = 0; i < 8; i++) {
+			pieces[i + 16] = new Pawn(Color.BLACK, new Position(i, 1));
+		}
+		
+		for (int i = 0; i < 8; i++) {
+			pieces[i + 24] = new Pawn(Color.WHITE, new Position(i, 6));
+		}
+	}
+	
+	
+	/**
 	 * @param columnX is a letter from a to h
 	 * @param lineY is a number from 1 to 8
 	 * @return The position of the Piece in piece[] if it was found. Else the output is -1.
+	 * @deprecated
 	 */
 	public int findPiece(char columnX, char lineY) {
 		int x = columnX - 97;
@@ -28,62 +125,5 @@ public class Chessboard {
 		}
 		//System.out.println("findPiece - none found");
 		return -1;	//There is no piece at this position
-	}
-	
-	public void drawBoard() {
-		for(int y = 0; y < 8; y++) {
-			for(int x = 0; x < 8; x++) {
-				if(board[x][y] != null) {
-					board[x][y].print();
-				}
-				else {
-					System.out.print("/");
-				}
-				System.out.print(" ");
-			}
-			System.out.println();
-		}
-	}
-	
-	public void fillBoard() {
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board.length; j++ ) {
-				board[i][j] = null;
-			}
-		}
-		for (int i = 0; i < pieces.length; i++) {
-			board[pieces[i].getX()][pieces[i].getY()] = pieces[i];
-		}
-	}
-	
-	public void createAllPieces() {
-		createPieces(Color.BLACK, 0); 
-		createPieces(Color.WHITE, 16);
-		for(int i = 0; i < 8; i++) {	//Black pieces
-			pieces[i].setPosition((char) ('a' + i), '1');
-		}
-		for(int i = 0; i < 8; i++) {	//Black pawns
-			pieces[i + 8].setPosition((char) ('a' + i), '2');
-		}
-		for(int i = 0; i < 8; i++) {	//White pieces
-			pieces[i + 16].setPosition((char) ('a' + i), '8');
-		}
-		for(int i = 0; i < 8; i++) {	//White pawns
-			pieces[i + 24].setPosition((char) ('a' + i), '7');
-		}
-	}
-	
-	private void createPieces(Color color, int start) {
-		pieces[start + 0] = new Rook(color);
-		pieces[start + 1] = new Knight(color);
-		pieces[start + 2] = new Bishop(color);
-		pieces[start + 3] = new Queen(color);
-		pieces[start + 4] = new King(color);
-		pieces[start + 5] = new Bishop(color);
-		pieces[start + 6] = new Knight(color);
-		pieces[start + 7] = new Rook(color);
-		for(int i = 0; i < 8; i++) {
-			pieces[start + 8 + i] = new Pawn(color);
-		}
 	}
 }

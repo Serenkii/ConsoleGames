@@ -2,16 +2,9 @@ package chess;
 
 public class King extends Piece {
 
-	public King(Color color) {
-		super(color);
-		if(this.color == Color.BLACK) {
-			//symbol = '♚';
-			symbol = 'K';
-		}
-		else if (this.color == Color.WHITE) {
-			//symbol = '♔';
-			symbol = 'k';
-		}
+	public King(Color color, Position position) {
+		super(color, position);
+		setSymbol("p");		//♚  & ♔
 		name = name + " pawn";
 		moves = new int[8][2];
 		steps = 1;

@@ -2,8 +2,9 @@ package chess;
 
 public class Bishop extends Piece {
 
-	public Bishop(Color color) {
-		super(color);
+	public Bishop(Color color, Position position) {
+		super(color, position);
+		setSymbol("b");		//♝  & ♗
 		if(this.color == Color.BLACK) {
 			//symbol = '♝';	
 			symbol = 'B';
