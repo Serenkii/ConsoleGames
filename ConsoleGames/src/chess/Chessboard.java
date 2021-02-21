@@ -44,6 +44,20 @@ public class Chessboard {
 		}
 		return -1;
 	}
+	
+	public int findLivePiece(Position position, Color color) {
+		for (int i = 0; i < pieces.length; i++) {
+			if (position.equals(pieces[i].position) && pieces[i].alive) {
+				if(pieces[i].color.equals(color)) {
+					return i;
+				}
+				else {
+					return -2;
+				}
+			}
+		}
+		return -1;
+	}
 
 	
 	public void drawBoard() {
@@ -72,7 +86,9 @@ public class Chessboard {
 			}
 		}
 		for (int i = 0; i < pieces.length; i++) {
-			board[pieces[i].getX()][pieces[i].getY()] = pieces[i];
+			if (pieces[i].alive) {
+				board[pieces[i].getX()][pieces[i].getY()] = pieces[i];
+			}
 		}
 	}
 	
@@ -80,7 +96,7 @@ public class Chessboard {
 		pieces[0] = new Rook(Color.BLACK, new Position(0, 0));
 		pieces[1] = new Knight(Color.BLACK, new Position(1, 0));
 		pieces[2] = new Bishop(Color.BLACK, new Position(2, 0));
-		pieces[3] = new Queen(Color.BLACK, new Position(3, 0));
+		pieces[3] = new Queen(Color.BLACK, new Position(3, 3));			//new Position(3, 0)
 		pieces[4] = new King(Color.BLACK, new Position(4, 0));
 		pieces[5] = new Bishop(Color.BLACK, new Position(5, 0));
 		pieces[6] = new Knight(Color.BLACK, new Position(6, 0));
@@ -89,7 +105,7 @@ public class Chessboard {
 		pieces[8] = new Rook(Color.WHITE, new Position(0, 7));
 		pieces[9] = new Knight(Color.WHITE, new Position(1, 7));
 		pieces[10] = new Bishop(Color.WHITE, new Position(2, 7));
-		pieces[11] = new Queen(Color.WHITE, new Position(3, 7));
+		pieces[11] = new Queen(Color.WHITE, new Position(3, 4));		//new Position(3, 7)
 		pieces[12] = new King(Color.WHITE, new Position(4, 7));
 		pieces[13] = new Bishop(Color.WHITE, new Position(5, 7));
 		pieces[14] = new Knight(Color.WHITE, new Position(6, 7));
@@ -104,6 +120,11 @@ public class Chessboard {
 		}
 	}
 	
+	public void debugPiecePrint() {
+		for (int i = 0; i < pieces.length; i++) {
+			System.err.println(pieces[i].toString());
+		}
+	}
 	
 	/**
 	 * @param columnX is a letter from a to h

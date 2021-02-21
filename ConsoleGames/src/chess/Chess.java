@@ -27,21 +27,29 @@ public class Chess {
 	 }
 	 
 	 public void play() {
+		 //board.debugPiecePrint();
 		 if(userInputFromConsole()) {		//true if the input kinda makes sense
 			 char[] inputArray = userInputString.toCharArray();
 			 Position oldPosition = new Position(inputArray[0], inputArray[1]);
 			 Position newPosition = new Position(inputArray[2], inputArray[3]);
-			 int objectNumber = board.findPiece(oldPosition, turn);
+			 int objectNumber = board.findLivePiece(oldPosition, turn);
 			 
 			 if(objectNumber >= 0 && objectNumber < 32) {	//true if the piece exists
 				 //System.out.println("A piece was found.");
-				 boolean succesful = board.pieces[objectNumber].move(newPosition, turn, board.board);
-				 if (succesful) {
+				 int status = board.pieces[objectNumber].move(newPosition, board.pieces);
+				 if (status >= -1 && status < 32) {
+					 if (status != -1) {
+						 System.err.println("DEBUG: Method capture() is used now.");
+						 board.pieces[status].capture();
+					 }
 					 changeTurn();
 					 System.out.println("\nIt's your turn now, " + turn + ".");
 				 }
-				 else {
+				 else if (status == -2) {
 					 System.out.println("The move is invalid.");
+				 }
+				 else {
+					 System.err.println("The status is not in [-2; 31]");
 				 } 
 			 }
 			 

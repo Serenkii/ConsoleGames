@@ -23,6 +23,16 @@ public class Piece {
 	}
 	
 
+	public boolean capture() {
+		if (this.alive) {
+			this.alive = false;
+			setPosition(new Position(-1, -1));
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	/**
 	 * spaghetti carbonara
@@ -60,18 +70,22 @@ public class Piece {
 								
 								//if there is a piece at that position and has the same color as the moving piece, then:
 								if (pieceList[id].color.equals(this.color)) {
+									System.err.println("DEBUG: You can't capture your own pieces.");
 									return -2;		//You can't capture your own pieces
 								}
 								else {
+									System.err.println("DEBUG: A piece is being captured: id == " + id);
 									setPosition(newPosition);
 									return id;	//returns the position of the piece to capture
 								}
 							}
 						}
 						setPosition(newPosition);
+						System.err.println("DEBUG: You moved succesfully.");
 						return -1;	//return true --> -1 means that the move was succesful, but no piece was captured
 					}
 					else {
+						System.err.println("DEBUG: There is a piece in the way.");
 						return -2;		//There is a piece in the way
 					}
 				}
@@ -85,6 +99,7 @@ public class Piece {
 				}
 			}
 		}
+		System.err.println("DEBUG: You can't move there.");
 		return -2;		//There is no way to move there
 	}
 	
@@ -134,12 +149,15 @@ public class Piece {
 		return position.yPos;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Piece [name=" + name + ", position=" + position + ", alive=" + alive + "]";
+	}
 	
 	/*
 	 * DEPRECATED MOVE-METHODS
 	 */
-	
+
 	/**
 	 * Looks for collision but can't give you information about the piece you want to capture
 	 * @param newPosition the place the piece tries to move to
