@@ -4,7 +4,7 @@ public class King extends Piece {
 
 	public King(Color color, Position position) {
 		super(color, position);
-		setSymbol("p");		//♚  & ♔
+		setSymbol("k");		//♚  & ♔
 		name = name + " pawn";
 		moves = new int[8][2];
 		steps = 1;

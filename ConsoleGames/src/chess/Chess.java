@@ -35,7 +35,7 @@ public class Chess {
 			 
 			 if(objectNumber >= 0 && objectNumber < 32) {	//true if the piece exists
 				 //System.out.println("A piece was found.");
-				 boolean succesful = board.pieces[objectNumber].move(newPosition);
+				 boolean succesful = board.pieces[objectNumber].move(newPosition, turn, board.board);
 				 if (succesful) {
 					 changeTurn();
 					 System.out.println("\nIt's your turn now, " + turn + ".");
