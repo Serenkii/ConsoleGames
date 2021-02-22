@@ -49,7 +49,7 @@ public class Chess {
 					 System.out.println("The move is invalid.");
 				 }
 				 else {
-					 System.err.println("The status is not in [-2; 31]");
+					 System.err.println("The status ∉ [-2; 31]");
 				 } 
 			 }
 			 

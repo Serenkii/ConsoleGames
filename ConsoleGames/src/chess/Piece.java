@@ -1,6 +1,6 @@
 package chess;
 
-public class Piece {
+public abstract class Piece {
 	String name;
 	char symbol;
 	Position position;
@@ -45,7 +45,7 @@ public class Piece {
 	 */
 	public int move(Position newPosition, Piece[] pieceList) {
 		//if the move is out of bound of the board, the move should be impossible
-		if (newPosition.xPos > 7 || newPosition.xPos < 0 || newPosition.yPos > 7 || newPosition.yPos < 0) {
+		if (move_enforceBoundries(newPosition) == false) {
 			return -2;
 		}
 		
@@ -103,6 +103,12 @@ public class Piece {
 		return -2;		//There is no way to move there
 	}
 	
+	 protected boolean move_enforceBoundries(Position newPosition) {
+		if (newPosition.xPos > 7 || newPosition.xPos < 0 || newPosition.yPos > 7 || newPosition.yPos < 0) {
+			return false;
+		}
+		return true;
+	}
 
 	public void print() {
 		System.out.print(symbol);
@@ -153,6 +159,8 @@ public class Piece {
 	public String toString() {
 		return "Piece [name=" + name + ", position=" + position + ", alive=" + alive + "]";
 	}
+	
+	public abstract void generateMoves();
 	
 	/*
 	 * DEPRECATED MOVE-METHODS
