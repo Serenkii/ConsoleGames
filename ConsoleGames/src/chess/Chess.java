@@ -14,21 +14,51 @@ public class Chess {
 		 userInput = new Scanner(System.in);
 		 validUserInput = false;
 		 setup();
-		 while(true) {
-			 play();
-		 }
+		 //playLoop();
 	 }
 	 
 	 public void setup() {
 		 board.createAllPieces();
 		 board.fillBoard();
-		 board.drawBoard();
+		 //board.drawEnhancedBoard();
 		 turn = Color.WHITE;
+	 }
+	 
+	 /**
+	  * A loop containing the game. It returns 0 when the game is ended by someone typing "stop". It returns 1 if WHITE won
+	  * and 2 if BLACK won.
+	  * @return interruption: 0; WHITE-win: 1; BLACK-win: 2
+	  */
+	 public int playLoop() {
+		 while (true) {
+			 play();
+			 if (userInputString.equals("stop")) {
+				 return 0;
+			 }
+			 for (int i = 0; i < board.pieces.length; i++) {
+				 if (board.pieces[i] instanceof King && board.pieces[i].alive == false) {
+					if (board.pieces[i].color == Color.WHITE) {
+						 return 1;
+					 }
+					 else if (board.pieces[i].color == Color.BLACK) {
+						 return 2;
+					 }
+					else {
+						 System.err.println("A king somehow is captured and has no color.");
+						 return -1;
+					}	 
+				 }
+			 }
+		 }
 	 }
 	 
 	 public void play() {
 		 //board.debugPiecePrint();
+		 board.drawEnhancedBoard();
 		 if(userInputFromConsole()) {		//true if the input kinda makes sense
+			 if (userInputString.equals("stop")) {
+				 return;
+			 }
 			 char[] inputArray = userInputString.toCharArray();
 			 Position oldPosition = new Position(inputArray[0], inputArray[1]);
 			 Position newPosition = new Position(inputArray[2], inputArray[3]);
@@ -39,11 +69,11 @@ public class Chess {
 				 int status = board.pieces[objectNumber].move(newPosition, board.pieces);
 				 if (status >= -1 && status < 32) {
 					 if (status != -1) {
-						 System.err.println("DEBUG: Method capture() is used now.");
+						 //System.err.println("DEBUG: Method capture() is used now.");
 						 board.pieces[status].capture();
 					 }
 					 changeTurn();
-					 System.out.println("\nIt's your turn now, " + turn + ".");
+					 //System.out.println("\nIt's your turn now, " + turn + ".");
 				 }
 				 else if (status == -2) {
 					 System.out.println("The move is invalid.");
@@ -68,7 +98,7 @@ public class Chess {
 			 System.out.println("Your input doesn't seem right. Maybe it's too long, too short or anything else, but please check it.");
 		 }
 		 board.fillBoard();
-		 board.drawBoard();
+		 //board.drawEnhancedBoard();
 	 }
 	 
 	 public boolean userInputFromConsole() {

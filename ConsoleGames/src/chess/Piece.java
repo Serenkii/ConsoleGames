@@ -74,18 +74,18 @@ public abstract class Piece {
 									return -2;		//You can't capture your own pieces
 								}
 								else {
-									System.err.println("DEBUG: A piece is being captured: id == " + id);
+									//System.err.println("DEBUG: A piece is being captured: id == " + id);
 									setPosition(newPosition);
 									return id;	//returns the position of the piece to capture
 								}
 							}
 						}
 						setPosition(newPosition);
-						System.err.println("DEBUG: You moved succesfully.");
+						//System.err.println("DEBUG: You moved succesfully.");
 						return -1;	//return true --> -1 means that the move was succesful, but no piece was captured
 					}
 					else {
-						System.err.println("DEBUG: There is a piece in the way.");
+						//System.err.println("DEBUG: There is a piece in the way.");
 						return -2;		//There is a piece in the way
 					}
 				}
@@ -99,7 +99,7 @@ public abstract class Piece {
 				}
 			}
 		}
-		System.err.println("DEBUG: You can't move there.");
+		//System.err.println("DEBUG: You can't move there.");
 		return -2;		//There is no way to move there
 	}
 	

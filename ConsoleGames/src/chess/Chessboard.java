@@ -79,6 +79,26 @@ public class Chessboard {
 		System.out.println("   a b c d e f g h\n");
 	}
 	
+	public void drawEnhancedBoard() {
+		System.out.println("\n    | a | b | c | d | e | f | g | h |");
+		System.out.println(" ---+---+---+---+---+---+---+---+---+---");
+		for(int y = 0; y < 8; y++) {
+			System.out.print(" " + (y + 1) + "  | ");
+			for(int x = 0; x < 8; x++) {
+				if(board[x][y] != null) {
+					board[x][y].print();
+				}
+				else {
+					System.out.print(" ");
+				}
+				System.out.print(" | ");
+			}
+			System.out.println(" " + (y + 1));
+			System.out.println(" ---+---+---+---+---+---+---+---+---+---");
+		}
+		System.out.println("    | a | b | c | d | e | f | g | h |\n");
+	}
+	
 	public void fillBoard() {
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++ ) {
@@ -96,21 +116,11 @@ public class Chessboard {
 		pieces[0] = new Rook(Color.BLACK, new Position(0, 0));
 		pieces[1] = new Knight(Color.BLACK, new Position(1, 0));
 		pieces[2] = new Bishop(Color.BLACK, new Position(2, 0));
-		pieces[3] = new Queen(Color.BLACK, new Position(3, 3));			//new Position(3, 0)
+		pieces[3] = new Queen(Color.BLACK, new Position(3, 0));			//new Position(3, 0)
 		pieces[4] = new King(Color.BLACK, new Position(4, 0));
 		pieces[5] = new Bishop(Color.BLACK, new Position(5, 0));
 		pieces[6] = new Knight(Color.BLACK, new Position(6, 0));
 		pieces[7] = new Rook(Color.BLACK, new Position(7, 0));
-		
-		pieces[8] = new Rook(Color.WHITE, new Position(0, 7));
-		pieces[9] = new Knight(Color.WHITE, new Position(1, 7));
-		pieces[10] = new Bishop(Color.WHITE, new Position(2, 7));
-		pieces[11] = new Queen(Color.WHITE, new Position(3, 4));		//new Position(3, 7)
-		pieces[12] = new King(Color.WHITE, new Position(4, 7));
-		pieces[13] = new Bishop(Color.WHITE, new Position(5, 7));
-		pieces[14] = new Knight(Color.WHITE, new Position(6, 7));
-		pieces[15] = new Rook(Color.WHITE, new Position(7, 7));
-		
 		for (int i = 0; i < 8; i++) {
 			pieces[i + 16] = new Pawn(Color.BLACK, new Position(i, 1));
 		}
@@ -118,6 +128,14 @@ public class Chessboard {
 		for (int i = 0; i < 8; i++) {
 			pieces[i + 24] = new Pawn(Color.WHITE, new Position(i, 6));
 		}
+		pieces[8] = new Rook(Color.WHITE, new Position(0, 7));
+		pieces[9] = new Knight(Color.WHITE, new Position(1, 7));
+		pieces[10] = new Bishop(Color.WHITE, new Position(2, 7));
+		pieces[11] = new Queen(Color.WHITE, new Position(3, 7));		//new Position(3, 7)
+		pieces[12] = new King(Color.WHITE, new Position(4, 7));
+		pieces[13] = new Bishop(Color.WHITE, new Position(5, 7));
+		pieces[14] = new Knight(Color.WHITE, new Position(6, 7));
+		pieces[15] = new Rook(Color.WHITE, new Position(7, 7));
 	}
 	
 	public void debugPiecePrint() {
