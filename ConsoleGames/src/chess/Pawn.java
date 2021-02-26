@@ -80,7 +80,7 @@ public class Pawn extends Piece {
 	}
 	
 	public void generateMoves() {
-		if(this.color == Color.BLACK) {
+		if(this.color == Color.WHITE) {
 			moves[0][0] = 0;
 			moves[0][1] = 1;
 			
@@ -90,7 +90,7 @@ public class Pawn extends Piece {
 			captureMoves[1][0] = 1;
 			captureMoves[1][1] = 1;
 		}
-		else if (this.color == Color.WHITE) {
+		else if (this.color == Color.BLACK) {
 			moves[0][0] = 0;
 			moves[0][1] = -1;
 			

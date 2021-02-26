@@ -113,29 +113,30 @@ public class Chessboard {
 	}
 	
 	public void createAllPieces() {
-		pieces[0] = new Rook(Color.BLACK, new Position(0, 0));
-		pieces[1] = new Knight(Color.BLACK, new Position(1, 0));
-		pieces[2] = new Bishop(Color.BLACK, new Position(2, 0));
-		pieces[3] = new Queen(Color.BLACK, new Position(3, 0));			//new Position(3, 0)
-		pieces[4] = new King(Color.BLACK, new Position(4, 0));
-		pieces[5] = new Bishop(Color.BLACK, new Position(5, 0));
-		pieces[6] = new Knight(Color.BLACK, new Position(6, 0));
-		pieces[7] = new Rook(Color.BLACK, new Position(7, 0));
 		for (int i = 0; i < 8; i++) {
-			pieces[i + 16] = new Pawn(Color.BLACK, new Position(i, 1));
+			pieces[i + 24] = new Pawn(Color.BLACK, new Position(i, 6));
 		}
+		pieces[8] = new Rook(Color.BLACK, new Position(0, 7));
+		pieces[9] = new Knight(Color.BLACK, new Position(1, 7));
+		pieces[10] = new Bishop(Color.BLACK, new Position(2, 7));
+		pieces[11] = new Queen(Color.BLACK, new Position(3, 7));		//new Position(3, 7)
+		pieces[12] = new King(Color.BLACK, new Position(4, 7));
+		pieces[13] = new Bishop(Color.BLACK, new Position(5, 7));
+		pieces[14] = new Knight(Color.BLACK, new Position(6, 7));
+		pieces[15] = new Rook(Color.BLACK, new Position(7, 7));
+		
 		
 		for (int i = 0; i < 8; i++) {
-			pieces[i + 24] = new Pawn(Color.WHITE, new Position(i, 6));
+			pieces[i + 16] = new Pawn(Color.WHITE, new Position(i, 1));
 		}
-		pieces[8] = new Rook(Color.WHITE, new Position(0, 7));
-		pieces[9] = new Knight(Color.WHITE, new Position(1, 7));
-		pieces[10] = new Bishop(Color.WHITE, new Position(2, 7));
-		pieces[11] = new Queen(Color.WHITE, new Position(3, 7));		//new Position(3, 7)
-		pieces[12] = new King(Color.WHITE, new Position(4, 7));
-		pieces[13] = new Bishop(Color.WHITE, new Position(5, 7));
-		pieces[14] = new Knight(Color.WHITE, new Position(6, 7));
-		pieces[15] = new Rook(Color.WHITE, new Position(7, 7));
+		pieces[0] = new Rook(Color.WHITE, new Position(0, 0));
+		pieces[1] = new Knight(Color.WHITE, new Position(1, 0));
+		pieces[2] = new Bishop(Color.WHITE, new Position(2, 0));
+		pieces[3] = new Queen(Color.WHITE, new Position(3, 0));			//new Position(3, 0)
+		pieces[4] = new King(Color.WHITE, new Position(4, 0));
+		pieces[5] = new Bishop(Color.WHITE, new Position(5, 0));
+		pieces[6] = new Knight(Color.WHITE, new Position(6, 0));
+		pieces[7] = new Rook(Color.WHITE, new Position(7, 0));
 	}
 	
 	public void debugPiecePrint() {
