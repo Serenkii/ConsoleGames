@@ -62,7 +62,7 @@ public class Chessboard {
 	
 	public void drawBoard() {
 		System.out.println("\n   a b c d e f g h\n");
-		for(int y = 0; y < 8; y++) {
+		for(int y = 7; y >= 0; y--) {
 			System.out.print(y + 1 + "  ");
 			for(int x = 0; x < 8; x++) {
 				if(board[x][y] != null) {
@@ -82,7 +82,7 @@ public class Chessboard {
 	public void drawEnhancedBoard() {
 		System.out.println("\n    | a | b | c | d | e | f | g | h |");
 		System.out.println(" ---+---+---+---+---+---+---+---+---+---");
-		for(int y = 0; y < 8; y++) {
+		for(int y = 7; y >= 0; y--) {
 			System.out.print(" " + (y + 1) + "  | ");
 			for(int x = 0; x < 8; x++) {
 				if(board[x][y] != null) {
